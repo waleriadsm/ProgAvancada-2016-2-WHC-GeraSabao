@@ -1,0 +1,36 @@
+c:\users\ucl\documents\visual studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\Waléria\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\ucl\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe.config
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.exe
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\bin\Debug\CooperativaWHC_GeraSabao.pdb
+C:\Users\ucl\Downloads\CooperativaWHC_GeraSabao TESTE\CooperativaWHC_GeraSabao\obj\Debug\CooperativaWHC_GeraSabao.csprojResolveAssemblyReference.cache

@@ -1,0 +1,37 @@
+﻿Conversão em Sabão
+
+Uma empresa startup chamada Cooperativa WHC GeraSabão, realiza a conversão de produtos em sabão por meio do seu volume e densidade. 
+
+Para o calculo da quntidade de soda a ser utiliada e da quantidade de água, usa-se a formula abaixo:
+quantidade de óleo em gramas x 0,136 = quantidade de soda necessária(mesma de água).
+
+A conversão é realizada da seguinte forma:
+
+      Densidade                             Conversão para Sabão
+Acima de 1,0 Kg/Litro de Soda			Usar 100% da densidade da soda para a conversão.
+Acima de 1,0 Kg/Litro de Abacate		Usar 90% da densidade da soda para a conversão.
+Acima de 1,0 Kg/Litro de Sebo			Usar 80% da densidade da soda para a conversão.
+
+
+Assim, independentemente do tipo de produto que será convertido para sabão, o objeto de conversão precisa saber o 
+volume e a densidade do produto a ser convertido. 
+
+
+O projeto em C# necessita que:
+
+Possua uma interface IViraSabão que garanta que qualquer classe que a implemente seja capaz de ter seus produto convertidos para sabão.
+
+Possua no mínimo 2 classes que implementam a interface indicada acima. 
+
+Possua uma classe chamada GeradorDeSabao que possua:
+Um método que gera sabão com base no volume de um objeto. Esse método deve receber um produto que pode ser transformado em 
+sabão e retornar a quantidade de sabão gerada (em gramas). 
+Um método que receba uma lista de objetos e retorne o total de sabão produzido por esses produtos (em gramas).
+Um método que recebe uma lista de objetos e retorne o valor total desses objetos considerando o valor de venda
+do grama de sabão produzido em real. 
+
+Possua um método principal (Main) que exibe um menu para o usuário que permita ao usuário:
+Criar objetos dos tipos indicados acima.
+Escolher um objeto para ser transformado em sabão.
+Criar uma lista de objetos para ser transformado em sabão.
+Indicar o valor em real de um conjunto de objetos (que podem ser de classes diferentes).
