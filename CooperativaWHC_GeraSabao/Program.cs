@@ -151,7 +151,7 @@ namespace CooperativaWHC_GeraSabao
                 GeraRelatorio.GeraRelatorioWHC(strPathFile + "WHC - RELATÓRIO_GERAL.txt", ListaClientes, qtdSabaoFeito, qtdSabaoVender, ListaGSabao, peso);
 
 
-                Console.WriteLine("Relatório gerado com sucesso! ");
+                Console.WriteLine("\nRelatório gerado com sucesso! ");
                 Console.WriteLine("Procure e abra o arquivo 'WHC - RELATÓRIO_GERAL.txt' em sua área de trabalho.");
 
                 Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
@@ -180,7 +180,7 @@ namespace CooperativaWHC_GeraSabao
 
             if (novo == "N")
             {
-                Console.Write("\nInforme o CPF/CNPJ do Cliente: ");
+                Console.Write("\nInforme o CPF/CNPJ do Cliente (somente números): ");
                 codigo = Console.ReadLine();
 
                 if(pessoa.ComparaCodigo(ListaClientes, codigo))                       // acertar aqui
@@ -375,14 +375,14 @@ namespace CooperativaWHC_GeraSabao
                     {
                         if (querFazer == 2)
                         {
-                            Program.produzirSabao(saldoEstoqueInsumo, qtdSabaoFeito, strPathFile, G, ListaGSabao);
+                            qtdSabaoFeito = Program.produzirSabao(saldoEstoqueInsumo, qtdSabaoFeito, strPathFile, G, ListaGSabao);
 
                         }
                         else
                         {
                             if (querFazer == 3)
                             {
-                                Program.venderSabao(saldoEstoqueInsumo, saldo, strPathFile, ListaClientes, codigo, c, opcao, ListaGSabao, peso, qtdSabaoVender);
+                                qtdSabaoVender = Program.venderSabao(saldoEstoqueInsumo, saldo, strPathFile, ListaClientes, codigo, c, opcao, ListaGSabao, peso, qtdSabaoVender);
                             }
                             else
                             {

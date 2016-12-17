@@ -23,23 +23,22 @@ namespace CooperativaWHC_GeraSabao
                     sw.WriteLine("\nClientes Cadastrados:");
                     foreach (var x in ListaClientes)
                     {
-                        sw.WriteLine("\nNome: " + x.Nome + ",");
-                        sw.WriteLine("Telefone: " + x.Telefone + ",");
-                        sw.WriteLine("Email: " + x.Email + ",");
-                        sw.WriteLine("Endereço: " + x.Endereco + ",");
-                        sw.WriteLine("CPF/CNPJ: " + x.GetCodigo() + ",");
+                        sw.WriteLine("\nNome: " + x.Nome);
+                        sw.WriteLine("Telefone: " + x.Telefone);
+                        sw.WriteLine("Email: " + x.Email);
+                        sw.WriteLine("Endereço: " + x.Endereco);
+                        sw.WriteLine("CPF/CNPJ: " + x.GetCodigo());
                         sw.WriteLine("");
                     }
 
                     sw.WriteLine("\n**************************************\n");
 
-                    sw.Write("\nQuantidadede sabão feito: ");
-                    sw.WriteLine(qtdSabaoFeito);
-
+                    sw.WriteLine("\nQuantidadede sabão feito: " + qtdSabaoFeito);
+                    
 
                     sw.WriteLine("\n**************************************\n");
 
-                    sw.Write("\nVendas realizadas: ");
+                    sw.WriteLine("\nVendas realizadas: ");
                     //CriaArquivoVenda
                     foreach (var x in ListaClientes)
                     {
@@ -64,28 +63,28 @@ namespace CooperativaWHC_GeraSabao
                         string[] nome = x.ToString().Split('.');
                         if (nome[1] == "Sebo")
                         {
-                            pesoSebo = pesoSebo + x.GetPeso();
+                            pesoSebo = x.GetPeso();
                         }
                         else
                         {
                             if (nome[1] == "Abacate")
                             {
-                                pesoAbacate = pesoAbacate + x.GetPeso();
+                                pesoAbacate = x.GetPeso();
                             }
                             else
                             {
                                 if (nome[1] == "Oleo")
                                 {
-                                    pesoOleo = pesoOleo + x.GetPeso();
+                                    pesoOleo = x.GetPeso();
                                 }
                             }
                         }
 
                         //sw.WriteLine("");
                     }
-                    sw.WriteLine("\nItem: " + nmAbacate + "; " + "Peso: " + pesoAbacate + ";");
-                    sw.WriteLine("Item: " + nmOleo + "; " + "Peso: " + pesoOleo + ";");
-                    sw.WriteLine("Item: " + nmSebo + "; " + "Peso: " + pesoSebo + ";");
+                    sw.WriteLine("\nItem: " + nmAbacate + " - " + "Peso: " + pesoAbacate);
+                    sw.WriteLine("Item: " + nmOleo + " - " + "Peso: " + pesoOleo);
+                    sw.WriteLine("Item: " + nmSebo + " - " + "Peso: " + pesoSebo);
                     
 
                     //Arquivo.ItensRecebidos(strPathFile, ListaGSabao);
@@ -94,7 +93,7 @@ namespace CooperativaWHC_GeraSabao
 
                     sw.WriteLine("\n**************************************");
 
-                    sw.WriteLine("\nEstoque atual de sabão: ");
+                    sw.WriteLine("\nEstoque atual de sabão: " + (qtdSabaoFeito- qtdSabaoVender));
 
                     //CriaEstoqueSabao                    
                     //float estoqueAtual = Arquivo.CriaEstoqueSabao(strPathFile, peso);
@@ -102,7 +101,7 @@ namespace CooperativaWHC_GeraSabao
 
                     sw.WriteLine("\n**************************************");
 
-                    sw.WriteLine("\nRenda gerada com a venda do Sabão: ");
+                    sw.WriteLine("\nRenda gerada com a venda do Sabão: " + (qtdSabaoFeito*18.6f));
 
                     //CriaEstoqueSabao
                     //sw.WriteLine((qtdSabaoFeito - estoqueAtual) * 18.6f);
