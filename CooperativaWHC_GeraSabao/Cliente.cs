@@ -13,6 +13,7 @@ namespace CooperativaWHC_GeraSabao
         private string email;
         private string endereco;
 
+
         public string Nome
         {
             get
@@ -65,6 +66,11 @@ namespace CooperativaWHC_GeraSabao
             }
         }
 
+        public Cliente()
+        {            
+        }
+
+
         public Cliente(string nome, string telefone, string email, string endereco)
         {
             this.Nome= nome;
@@ -72,11 +78,15 @@ namespace CooperativaWHC_GeraSabao
             this.Email = email;
             this.Endereco = endereco;
         }
-
+                
         public abstract string GetCodigo();
 
+       
+        public abstract string GetNome();
+
         public abstract bool ComparaCodigo(List<Cliente> ListaCliente, string codigo);
-        
+
+        public abstract string NomeCliente(List<Cliente> ListaCliente, string codigo);
 
     }
 }

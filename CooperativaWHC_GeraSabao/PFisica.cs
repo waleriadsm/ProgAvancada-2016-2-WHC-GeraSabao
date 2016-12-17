@@ -23,6 +23,11 @@ namespace CooperativaWHC_GeraSabao
             }
         }
 
+        public PFisica()
+        {
+            
+        }
+
         public PFisica(string cpf, string nome, string telefone, string email, string endereco) : base(nome, telefone, email, endereco)
         {
             this.Cpf = cpf;
@@ -37,6 +42,12 @@ namespace CooperativaWHC_GeraSabao
             return Cpf;
         }
 
+        
+        public override string GetNome()
+        {            
+            return Nome;
+        }
+
         public override bool ComparaCodigo(List<Cliente> listaClientes, string codigo)
         {
             for (int i = 0; i < listaClientes.Count; i++)
@@ -47,6 +58,18 @@ namespace CooperativaWHC_GeraSabao
                 }
             }
             return false;
+        }
+
+        public override string NomeCliente(List<Cliente> listaClientes, string codigo)
+        {
+            for (int i = 0; i < listaClientes.Count; i++)
+            {
+                if (codigo == listaClientes[i].GetCodigo())
+                {
+                    return listaClientes[i].GetNome();
+                }
+            }
+            return "";
         }
 
 

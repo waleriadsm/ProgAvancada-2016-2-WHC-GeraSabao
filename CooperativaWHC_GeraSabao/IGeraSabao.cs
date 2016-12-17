@@ -8,8 +8,10 @@ namespace CooperativaWHC_GeraSabao
 {
     interface IGeraSabao
     {
-        float Densidade();
+        
         float Volume();
-                
+        float GetPeso();
+        string GetNome();
+
     }
 }

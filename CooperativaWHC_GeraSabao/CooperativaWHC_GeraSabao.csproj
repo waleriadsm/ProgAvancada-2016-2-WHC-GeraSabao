@@ -46,6 +46,7 @@
     <Compile Include="Abacate.cs" />
     <Compile Include="Arquivo.cs" />
     <Compile Include="GeradorDeSabao.cs" />
+    <Compile Include="GeraRelatorio.cs" />
     <Compile Include="IGeraSabao.cs" />
     <Compile Include="Menus.cs" />
     <Compile Include="NumeroInvalidoException.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="Produto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Relatorio.cs" />
+    <Compile Include="CarregaDados.cs" />
     <Compile Include="Sebo.cs" />
   </ItemGroup>
   <ItemGroup>

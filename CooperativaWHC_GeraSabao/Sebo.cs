@@ -8,9 +8,23 @@ namespace CooperativaWHC_GeraSabao
 {
     class Sebo : Produto
     {
-        public Sebo(float peso) : base(peso)
+        public Sebo(float peso, string nome) : base(peso, nome)
         {
             this.Peso = peso;
+            this.Nome = "Sebo";
+        }
+
+        public override bool ComparaObjeto(List<IGeraSabao> ListaGSabao, IGeraSabao x, float pesoi)
+        {
+            for (int i = 0; i < ListaGSabao.Count; i++)
+            {
+                if (x == ListaGSabao[i])
+                {
+                    pesoi = ListaGSabao[i].GetPeso();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -15,45 +15,50 @@ namespace CooperativaWHC_GeraSabao
 
         public float GeraSabao(IGeraSabao x)
         {
-            if (x.Volume() > 3.0)
+            if (x.Volume() > 15.0)
             {
-                sabaoProduzido = x.Densidade() * 1.0f;
+                sabaoProduzido = x.Volume() * 1.0f;
             }
             else
             {
-                if (x.Volume() > 2.1)
+                if (x.Volume() > 9.0)
                 {
-                    sabaoProduzido = x.Densidade() * 0.8f;
+                    sabaoProduzido = x.Volume() * 0.8f;
                 }
                 else
                 {
-                    if (x.Volume() > 1.1)
+                    if (x.Volume() > 5.0)
                     {
-                        sabaoProduzido = x.Densidade() * 0.6f;
+                        sabaoProduzido = x.Volume() * 0.6f;
                     }
                     else
                     {
-                        if (x.Volume() > 0.1)
+                        if (x.Volume() > 1.0)
                         {
-                            sabaoProduzido = x.Densidade() * 0.4f;
+                            sabaoProduzido = x.Volume() * 0.4f;
                         }
                     }
                 }
             }
+                        
+            string[] nome = x.ToString().Split('.');
 
-            Console.WriteLine("O produto " + x + " gerou de sabao (em gramas): ");
+            Console.WriteLine("\nO produto " + x.GetNome() + " gerou de sabao: " + sabaoProduzido +"kg");
+
+            Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+            Console.ReadKey();
             return sabaoProduzido;
-        }
+        }               
 
 
-        public float TotalDeSabao(List<IGeraSabao> Objetos)
+    public float TotalDeSabao(List<IGeraSabao> Objetos)
         {
             foreach (var x in Objetos)
             {
                 TotalSabaoProduzido += GeraSabao(x);
             }            
             
-            Console.WriteLine("Os produtos geraram de sabao(em gramas): ");
+            Console.WriteLine("Os produtos geraram de sabao " + TotalSabaoProduzido + "kg");
             return TotalSabaoProduzido;
         }
 

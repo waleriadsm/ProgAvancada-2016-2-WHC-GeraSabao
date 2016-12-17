@@ -23,6 +23,10 @@ namespace CooperativaWHC_GeraSabao
             }
         }
 
+        public PJuridica()
+        {            
+        }
+
         public PJuridica(string cnpj, string nome, string telefone, string email, string endereco) : base (nome, telefone, email, endereco)
         {
             this.CNPJ = cnpj;
@@ -37,6 +41,13 @@ namespace CooperativaWHC_GeraSabao
             return CNPJ;
         }
 
+        
+
+        public override string GetNome()
+        {
+            return Nome;
+        }
+
         public override bool ComparaCodigo(List<Cliente> listaClientes, string codigo)
         {
             for (int i = 0; i < listaClientes.Count; i++)
@@ -49,6 +60,19 @@ namespace CooperativaWHC_GeraSabao
             return false;
         }
 
+
+        public override string NomeCliente(List<Cliente> listaClientes, string codigo)
+        {
+            for (int i = 0; i < listaClientes.Count; i++)
+            {
+                if (codigo == listaClientes[i].GetCodigo())
+                {
+                    return listaClientes[i].GetNome();
+                }
+            }
+            return "";
+
+        }
 
     }
 }

@@ -9,121 +9,226 @@ namespace CooperativaWHC_GeraSabao
 {
     class Program
     {
-        public static void produzirSabao(float qtdSabaoFeito, string strPathFile, GeradorDeSabao G, List<IGeraSabao> ListaGSabao)
+        public static float produzirSabao(float saldoEstoqueInsumo, float qtdSabaoFeito, string strPathFile, GeradorDeSabao G, List<IGeraSabao> ListaGSabao)
         {
+            saldoEstoqueInsumo = Arquivo.CarregaEstoqueInsumo(strPathFile + "EstoqueInsumo.txt");
+            
             //Escolher um objeto para ser transformado em sabao.
-            Console.WriteLine("\nEscolha um objeto para ser transformado em Sabão. ");
-
-            int cont = 1;
-            foreach (var x in ListaGSabao)
+            if(saldoEstoqueInsumo > 0)
             {
-                string[] nome = x.ToString().Split('.');
-                Console.WriteLine(cont + " - " + nome[1] + "; ");
-                cont += cont;
-            }
+                Console.WriteLine("\nEscolha um objeto para ser transformado em Sabão. \n");
 
-            Console.Write("\nDigite a referencia do item escolhido: ");
-            int item = Convert.ToInt32(Console.ReadLine());
+                float pesoUsado;
+                float EstoqueSabao;
+                int cont = 1;
 
-            qtdSabaoFeito = G.GeraSabao(ListaGSabao[item - 1]);
-
-                       
-            Arquivo.gerenciaEstoque((strPathFile + "estoque.txt"), qtdSabaoFeito);
-
-
-            ListaGSabao.Remove(ListaGSabao[item - 1]);
-        }
-
-        //*************************************************************************************
-        public static void venderSabao(float saldo, float qtdSabaoFeito, string strPathFile, List<Cliente> ListaClientes, string codigo, Cliente c, int opcao, List<IGeraSabao> ListaGSabao, float peso, float qtdSabaoVender)
-        {            
-            Arquivo.CarregaEstoque(strPathFile + "estoque.txt");
-
-            Console.WriteLine("\nQuantidade de sabao em estoque: "+ qtdSabaoFeito);
-
-            Console.Write("\nInforme o CPF/CNPJ do Cliente: ");
-            codigo = Console.ReadLine();            
-
-            if (c.ComparaCodigo(ListaClientes, codigo))                       // acertar aqui
-            {
-                Console.WriteLine("Cliente: ", c.Nome);
-
-                Console.Write("\nQual a quantidade de sabão a ser vendida? ");
-                qtdSabaoVender = float.Parse(Console.ReadLine());
+                foreach (var x in ListaGSabao)
+                {
+                    string[] nome = x.ToString().Split('.');
+                    Console.WriteLine(cont + " - " + nome[1] + " - " + x.Volume() + "Kg; ");                   
+                    cont++;
+                }
                 
-                Arquivo.CriaArquivoVenda((strPathFile + "ArquivoVenda.txt"), ListaClientes, qtdSabaoVender);
 
-                saldo = qtdSabaoFeito - qtdSabaoVender;
+                Console.Write("\nDigite a referencia do item escolhido: ");
+                int item = Convert.ToInt32(Console.ReadLine());
 
-                Arquivo.gerenciaEstoque((strPathFile + "estoque.txt"), saldo);
+                qtdSabaoFeito = G.GeraSabao(ListaGSabao[item - 1]);
 
-            }
-            else
+                pesoUsado = ListaGSabao[item - 1].Volume();
+
+                saldoEstoqueInsumo = saldoEstoqueInsumo - pesoUsado;
+
+                EstoqueSabao = Arquivo.CarregaEstoque(strPathFile + "EstoqueSabao.txt");
+
+                EstoqueSabao = EstoqueSabao + qtdSabaoFeito;
+
+                Arquivo.gerenciaEstoque((strPathFile + "EstoqueSabao.txt"), EstoqueSabao);
+
+                Arquivo.CriaEstoqueInsumo((strPathFile + "EstoqueInsumo.txt"), saldoEstoqueInsumo);
+
+                ListaGSabao.Remove(ListaGSabao[item - 1]);
+            }else
             {
-                Console.Write("\nCliente não encontrado. Verifique os dados informados: ");
+                Console.WriteLine("\nAtenção! Estoque de Insumos insuficiente para produzir sabão.");
+                Console.WriteLine("Aguarde o novo recebimento.");
+
+                Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
                 Console.ReadKey();
-                Console.Clear();
-                Menus.Titulo();
-                
-                receberProduto(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
             }
+
+            return qtdSabaoFeito;
             
         }
-        
+
+        //*************************************************************************************
+        public static float venderSabao(float saldoEstoqueInsumo, float saldo, string strPathFile, List<Cliente> ListaClientes, string codigo, Cliente pessoa, int opcao, List<IGeraSabao> ListaGSabao, float peso, float qtdSabaoVender)
+        {
+            float renda = 0;
+            saldo = Arquivo.CarregaEstoque(strPathFile + "EstoqueSabao.txt");
+
+            if(saldo != 0)
+            {
+                Console.WriteLine("\nQuantidade de sabao em estoque: " + saldo);
+
+                Console.Write("\nInforme o CPF/CNPJ do Cliente: ");
+                codigo = Console.ReadLine();
+
+                if (pessoa.ComparaCodigo(ListaClientes, codigo))
+                {
+                    Console.Write("\nQual a quantidade de sabão a ser vendida? ");
+                    qtdSabaoVender = float.Parse(Console.ReadLine());
+
+
+                    if (qtdSabaoVender <= saldo) //&& qtdSabaoVender != 0
+                    {
+                        Arquivo.CriaArquivoVenda((strPathFile + "ArquivoVenda.txt"), ListaClientes, qtdSabaoVender);
+                        saldo = saldo - qtdSabaoVender;
+                        Arquivo.gerenciaEstoque((strPathFile + "EstoqueSabao.txt"), saldo);
+                        renda = qtdSabaoVender * 18.6f;
+                        Console.WriteLine("\nValor a ser pago pelo Cliente: " + renda);
+
+                        Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                        Console.ReadKey();
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nAtenção! Estoque insuficiente para a realização da venda.");
+                        Console.WriteLine("Produza mais sabão ou peça desculpas ao cliente.");
+
+                        Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                        Console.ReadKey();
+                    }
+
+                }
+                else
+                {
+                    Console.Write("\nCliente não encontrado. Verifique os dados informados e tente novamente. ");
+                    Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                    Console.ReadKey();
+
+                    Console.WriteLine("\nDeseja cadastrar o cliente? (Digite S para Sim ou N para Não)");
+                    string querCadastrar = Console.ReadLine();
+                    querCadastrar = querCadastrar.ToUpper();
+
+                    if (querCadastrar == "S")
+                    {
+                        CadastrarCliente(saldoEstoqueInsumo, strPathFile, opcao, ListaGSabao, ListaClientes, peso);
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Menus.Titulo();
+
+                    }
+
+                }
+            }else
+            {
+                Console.WriteLine("\nAtenção! Estoque insuficiente para a realização da venda.");
+                Console.WriteLine("Produza mais sabão ou peça desculpas ao cliente.");
+
+                Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                Console.ReadKey();
+            }
+            return qtdSabaoVender;
+
+
+        }        
     
     
         //*************************************************************************************
 
 
-        public static void gerarRelatorio(GeradorDeSabao G, List<IGeraSabao> ListaGSabao)
-        {            
-            //Indicar o valor em real de um conjunto de objetos(que podem ser de classes diferentes).
-            Console.WriteLine("A quantidade total de Sabao produzido pelos itens recebidos é: ");
-            G.TotalDeSabao(ListaGSabao);
+        public static void gerarRelatorio(string strPathFile, List<IGeraSabao> ListaGSabao, List<Cliente> ListaClientes, float qtdSabaoFeito, float qtdSabaoVender, float peso)
+        {
+            strPathFile = @"C:\Users\waler\Desktop\";
+            //try
+            //{ 
 
-            Console.WriteLine("\nO valor Total em Real em Sabao Produzido é: ");
-            G.TotalDeObjeto(ListaGSabao, 18.6f);
+            
+                GeraRelatorio.GeraRelatorioWHC(strPathFile + "WHC - RELATÓRIO_GERAL.txt", ListaClientes, qtdSabaoFeito, qtdSabaoVender, ListaGSabao, peso);
+
+
+                Console.WriteLine("Relatório gerado com sucesso! ");
+                Console.WriteLine("Procure e abra o arquivo 'WHC - RELATÓRIO_GERAL.txt' em sua área de trabalho.");
+
+                Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                Console.ReadKey();
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("\nSeu relatório não pôde ser gerado.");
+            //    Console.WriteLine("Digite qualquer tecla para prosseguir.");
+            //    Console.ReadKey();
+            //}
+                        
         }
 
         //*************************************************************************************       
 
 
-        public static void receberProduto(string strPathFile, Cliente c, int opcao, List<IGeraSabao> ListaGSabao, List<Cliente> ListaClientes, float peso)
+        public static void receberProduto(float saldoEstoqueInsumo, string strPathFile, Cliente pessoa, int opcao, List<IGeraSabao> ListaGSabao, List<Cliente> ListaClientes, float peso)
         {            
             
             Console.Write("\nCliente NOVO? (Digite S para sim ou N para não) ");
             string novo = Console.ReadLine();
             novo = novo.ToUpper();
-            string codigo = "";
-            int encontrado = 0;
+            string codigo = "";            
 
             if (novo == "N")
             {
                 Console.Write("\nInforme o CPF/CNPJ do Cliente: ");
                 codigo = Console.ReadLine();
 
-                if(c.ComparaCodigo(ListaClientes, codigo))                       // acertar aqui
-                {               
-                
-                    Menus.MenuReceber(opcao, ListaGSabao, peso);
-                    Console.WriteLine(c.Nome);
-                    encontrado = 1;
+                if(pessoa.ComparaCodigo(ListaClientes, codigo))                       // acertar aqui
+                {
+
+                    for (int i = 0; i < ListaClientes.Count; i++)
+                    {
+                        if (codigo == ListaClientes[i].GetCodigo())
+                        {                            
+                            Console.WriteLine("Cliente: " + ListaClientes[i].GetNome());
+                        }
+                    }
+
+                    Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
                     Console.ReadKey();
+
+                    Menus.MenuReceber(saldoEstoqueInsumo, strPathFile, opcao, ListaGSabao, peso, pessoa);
+                    
                 }
                 else
                 {                 
-                        Console.Write("\nCliente não encontrado. Verifique os dados informados: ");
+                        Console.Write("\nCliente não encontrado. Verifique os dados informados e tente novamente. ");
+                        Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
                         Console.ReadKey();
                         Console.Clear();
                         Menus.Titulo();                    
-                        receberProduto(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);                   
+                        receberProduto(saldoEstoqueInsumo, strPathFile, pessoa, opcao, ListaGSabao, ListaClientes, peso);                   
                     
                 }
             }
             else
             {
-                CadastrarCliente(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
-                Menus.MenuReceber(opcao, ListaGSabao, peso);
+
+                if (pessoa.ComparaCodigo(ListaClientes, codigo))                       // acertar aqui
+                {
+                    Console.WriteLine("\nO CPF informado já pertence à outro cliente.");
+                    Console.WriteLine("\nDigite qualquer tecla para prosseguir.");
+                    Console.ReadKey();                                       
+
+                }
+                else
+                {
+                    CadastrarCliente(saldoEstoqueInsumo, strPathFile, opcao, ListaGSabao, ListaClientes, peso);
+                    Menus.MenuReceber(saldoEstoqueInsumo, strPathFile, opcao, ListaGSabao, peso, pessoa);
+
+                }
+
+                
             }            
                        
                         
@@ -132,7 +237,7 @@ namespace CooperativaWHC_GeraSabao
         //*************************************************************************************
 
         
-        public static List<Cliente> CadastrarCliente(string strPathFile, Cliente c, int opcao, List<IGeraSabao> ListaGSabao, List<Cliente> ListaClientes, float peso)
+        public static List<Cliente> CadastrarCliente(float saldoEstoqueInsumo, string strPathFile, int opcao, List<IGeraSabao> ListaGSabao, List<Cliente> ListaClientes, float peso)
         {            
 
             Console.Clear();
@@ -156,6 +261,7 @@ namespace CooperativaWHC_GeraSabao
             string endereco = Console.ReadLine();
 
             Cliente pessoa;
+                        
             if (TpPessoa == "F")
             {
                 Console.Write("CPF: ");
@@ -174,7 +280,7 @@ namespace CooperativaWHC_GeraSabao
                     {
                         if (aCad == 0)
                         {
-                            receberProduto(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
+                            receberProduto(saldoEstoqueInsumo, strPathFile, pessoa, opcao, ListaGSabao, ListaClientes, peso);
                         }
                     }
 
@@ -199,7 +305,7 @@ namespace CooperativaWHC_GeraSabao
                     {
                         if (aCad == 0)
                         {
-                            receberProduto(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
+                            receberProduto(saldoEstoqueInsumo, strPathFile, pessoa, opcao, ListaGSabao, ListaClientes, peso);
                         }
                     }
                 }
@@ -224,27 +330,29 @@ namespace CooperativaWHC_GeraSabao
             float peso = 0;
             string codigo = "";
             float saldo = 0;
+            float saldoEstoqueInsumo = 0;
+            float qtdSabaoVender = 0;
+            float qtdSabaoFeito = 0;
 
             List<IGeraSabao> ListaGSabao = new List<IGeraSabao>();
 
             List<Cliente> ListaClientes = new List<Cliente>();
 
-            //string strPathFile = @"C:/Users/waler/Documents/Visual Studio 2015/Projects/CooperativaWHC_GeraSabao TESTE/";
-            //Arquivo.CarregarListaClientes((strPathFile + "ListadeClientes.txt"), ListaClientes);
-
-            GeradorDeSabao G = new GeradorDeSabao();
-            Cliente c = new PFisica("teste", "teste", "teste", "teste", "teste");
-
             
+            GeradorDeSabao G = new GeradorDeSabao();
+            Cliente c = new PFisica("", "", "", "", "");
+
+            CarregaDados.CarregaArquivo(ListaClientes);//, c
+            CarregaDados.CarregaArquivoInsumo(ListaGSabao);
+            //Console.ReadKey();
                         
             while (querFazer != 0) 
             {
                 Console.Clear();
                 Menus.Titulo();
-                float qtdSabaoVender = 0;
-                float qtdSabaoFeito = 0;
-
-                string strPathFile = @"C:/Users/waler/Documents/Visual Studio 2015/Projects/CooperativaWHC_GeraSabao TESTE/";
+                                
+                string strPathFile = @"C:\Users\waler\Documents\Visual Studio 2015\Projects\CooperativaWHC_GeraSabao TESTE\RELATÓRIOS\";
+                //string strPathFile2 = @"C:\Users\waler\Desktop\WHC - RELATÓRIO_GERAL_"+ DateTime.Today + ".txt";
 
                 Console.WriteLine("\nO que você deseja fazer?");
                 Console.WriteLine("\n1 - Receber um Produto"); //problema no cadastro do cliente - verificar se já esta cadastrado
@@ -260,27 +368,27 @@ namespace CooperativaWHC_GeraSabao
                 {
                     if (querFazer == 1)
                     {
-                        Program.receberProduto(strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
+                        Program.receberProduto(saldoEstoqueInsumo, strPathFile, c, opcao, ListaGSabao, ListaClientes, peso);
 
                     }
                     else
                     {
                         if (querFazer == 2)
                         {
-                            Program.produzirSabao(qtdSabaoFeito, strPathFile, G, ListaGSabao);
+                            Program.produzirSabao(saldoEstoqueInsumo, qtdSabaoFeito, strPathFile, G, ListaGSabao);
 
                         }
                         else
                         {
                             if (querFazer == 3)
                             {
-                                Program.venderSabao(saldo, qtdSabaoFeito, strPathFile, ListaClientes, codigo, c, opcao, ListaGSabao, peso, qtdSabaoVender);
+                                Program.venderSabao(saldoEstoqueInsumo, saldo, strPathFile, ListaClientes, codigo, c, opcao, ListaGSabao, peso, qtdSabaoVender);
                             }
                             else
                             {
                                 if (querFazer == 4)
                                 {
-                                    Program.gerarRelatorio(G, ListaGSabao);
+                                    Program.gerarRelatorio(strPathFile, ListaGSabao, ListaClientes, qtdSabaoFeito, qtdSabaoVender, peso);//alterar
                                 }
                                 else
                                 {
@@ -288,16 +396,17 @@ namespace CooperativaWHC_GeraSabao
                                     { querFazer = 0; }
                                     else
                                     {
-                                        throw new ArgumentException("Uma opçao inválida foi digitada. Por Favor, escolha uma opçao válida.");
+                                        throw new NumeroInvalidoException("Uma opçao inválida foi digitada. Por Favor, escolha uma opçao válida.", null);
                                     }
                                 }
                             }
                         }
                     }
                 }
-                catch (ArgumentException ex)
+                catch (NumeroInvalidoException ex)
                 {
-                    Console.WriteLine("\nUma opção inválida foi digitada. Por favor, verifique o valor inserido e tente novamente.");
+                    Console.WriteLine("\nUma opçao inválida foi digitada. Por Favor, escolha uma opçao válida e tente novamente.");
+                    Console.WriteLine("Digite qualquer tecla para prosseguir.");
                     Console.ReadKey();
                 }
             }

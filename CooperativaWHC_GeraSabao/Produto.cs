@@ -11,6 +11,7 @@ namespace CooperativaWHC_GeraSabao
 
         private float peso;
         private float volume;
+        private string nome;
 
 
         public float Peso
@@ -39,24 +40,45 @@ namespace CooperativaWHC_GeraSabao
             }
         }
 
+        public string Nome
+        {
+            get
+            {
+                return nome;
+            }
+
+            set
+            {
+                nome = value;
+            }
+        }
+
         //Contrutores
-        public Produto(float peso)
+        public Produto(float peso, string nome)
         {
             this.Peso = peso;
+            this.Nome = nome;
 
         }
 
-        public float Densidade()
-        {
-            float densidade = this.peso / this.volume;
-            return densidade;
-        }
-
+        
         public float Volume()
         {
-            float densidade = this.peso / this.volume;
-            return densidade;
+            float volume = this.peso;
+            return volume;
         }
+
+        public float GetPeso()
+        {
+            return peso;
+        }
+
+        public string GetNome()
+        {
+            return nome;
+        }
+
+        public abstract bool ComparaObjeto(List<IGeraSabao> ListaGSabao, IGeraSabao x, float peso);
 
     }
 }
